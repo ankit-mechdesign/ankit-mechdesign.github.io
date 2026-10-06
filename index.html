@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ankit Badola, project manager for BIW tooling, fixture design and automation lines in the automotive industry. Based in Ingolstadt, Germany.">
+<title>Ankit Badola</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout concept: an engineering drawing sheet. A title block in the hero, hairline frames,
+   mono labels for dates and metadata, square corners, one petrol-blue accent on navy-slate neutrals. */
+:root {
+  --bg: #f3f6f9;
+  --surface: #fbfcfe;
+  --ink: #0f1f33;
+  --ink-2: #455a70;
+  --line: #c8d3de;
+  --accent: #0b6477;
+  --accent-ink: #ffffff;
+  --band: #e4ecf3;
+  --f-display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Barlow", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0c1726; --surface: #12223a; --ink: #e5edf6; --ink-2: #9db1c6; --line: #263a54;
+    --accent: #5cc8d6; --accent-ink: #08222a; --band: #101e33; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0c1726; --surface: #12223a; --ink: #e5edf6; --ink-2: #9db1c6; --line: #263a54;
+  --accent: #5cc8d6; --accent-ink: #08222a; --band: #101e33; color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-padding-top: 6.5rem; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 72rem; margin-inline: auto; padding-inline: 1rem; }
+@media (min-width: 640px) { .wrap { padding-inline: 2rem; } }
+
+h1, h2, h3 { font-family: var(--f-display); font-weight: 600; line-height: 1.04; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.6rem, 7vw, 4.6rem); letter-spacing: -0.005em; }
+h2 { font-size: clamp(1.9rem, 4.4vw, 2.9rem); }
+h3 { font-size: 1.45rem; line-height: 1.15; }
+p { margin: 0; }
+.mono { font-family: var(--f-mono); }
+.label {
+  font-family: var(--f-mono); font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.eyebrow { color: var(--accent); }
+
+/* Header */
+.site-head {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--bg); border-bottom: 1px solid var(--line);
+}
+.head-in { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; flex-wrap: wrap; padding-block: 0.7rem; }
+.brand { font-family: var(--f-display); font-weight: 700; font-size: 1.35rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
+.site-nav { display: flex; gap: 0.25rem 1.25rem; overflow-x: auto; max-width: 100%; }
+.site-nav a { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; color: var(--ink-2); padding-block: 0.35rem; white-space: nowrap; border-bottom: 2px solid transparent; }
+.site-nav a:hover { color: var(--ink); border-bottom-color: var(--accent); }
+
+/* Sections */
+.sec { padding-block: clamp(3rem, 7vw, 5.5rem); border-top: 1px solid var(--line); }
+.sec-head { display: grid; gap: 0.9rem; margin-bottom: clamp(1.75rem, 4vw, 2.75rem); max-width: 46rem; }
+.sec-head p { color: var(--ink-2); }
+
+/* Hero */
+.hero { border-top: 0; padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2rem, 5vw, 3.5rem); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+@media (max-width: 880px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+.hero-copy { display: grid; gap: 1.4rem; }
+.hero-copy .lede { font-size: 1.2rem; color: var(--ink-2); max-width: 36rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { font-family: var(--f-mono); font-size: 0.78rem; padding: 0.3rem 0.65rem; border: 1px solid var(--line); background: var(--surface); }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn { display: inline-block; font-family: var(--f-mono); font-size: 0.82rem; letter-spacing: 0.05em; text-transform: uppercase; text-decoration: none; padding: 0.8rem 1.25rem; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); background: var(--accent); color: var(--accent-ink); }
+
+.titleblock { border: 1.5px solid var(--ink); background: var(--surface); }
+.tb-row { display: grid; grid-template-columns: 7.2rem minmax(0, 1fr); border-top: 1px solid var(--line); }
+.tb-row:first-child { border-top: 0; }
+.tb-row > * { padding: 0.6rem 0.8rem; }
+.tb-row .label { border-right: 1px solid var(--line); display: flex; align-items: center; }
+.tb-row .val { font-size: 0.98rem; line-height: 1.4; overflow-wrap: anywhere; }
+.tb-name { padding: 1rem 0.8rem 0.9rem; border-bottom: 1.5px solid var(--ink); }
+.tb-name .nm { font-family: var(--f-display); font-weight: 700; font-size: 2rem; text-transform: uppercase; letter-spacing: 0.03em; line-height: 1.05; }
+.tb-name .label { display: block; margin-bottom: 0.3rem; }
+
+.clients { margin-top: clamp(2rem, 5vw, 3.25rem); padding-top: 1.25rem; border-top: 1px solid var(--line); display: grid; gap: 0.6rem; }
+.client-list { display: flex; flex-wrap: wrap; gap: 0.3rem 1.4rem; font-family: var(--f-display); font-weight: 500; font-size: 1.35rem; letter-spacing: 0.02em; }
+
+/* About */
+.about-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+@media (max-width: 880px) { .about-grid { grid-template-columns: minmax(0, 1fr); } }
+.prose { display: grid; gap: 1.1rem; max-width: 38rem; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid var(--line); background: var(--surface); }
+.stat { padding: 1.25rem 1.1rem; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: grid; gap: 0.25rem; align-content: start; }
+.stat:nth-child(2n) { border-right: 0; }
+.stat:nth-child(n+3) { border-bottom: 0; }
+.stat .n { font-family: var(--f-display); font-weight: 700; font-size: 2.6rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat .t { color: var(--ink-2); font-size: 0.95rem; line-height: 1.4; }
+
+/* Projects */
+.tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; margin-bottom: 1.25rem; }
+@media (max-width: 800px) { .tabs { grid-template-columns: minmax(0, 1fr); } }
+.tab { text-align: left; font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--line); padding: 1rem 1.1rem 1.1rem; cursor: pointer; display: grid; gap: 0.45rem; align-content: start; }
+.tab:hover { border-color: var(--ink-2); border-top-color: var(--ink-2); }
+.tab[aria-selected="true"] { border-color: var(--ink); border-top-color: var(--accent); }
+.tab .tt { font-family: var(--f-display); font-weight: 600; font-size: 1.4rem; line-height: 1.12; }
+.tab .ts { color: var(--ink-2); font-size: 0.92rem; line-height: 1.4; }
+.panel { border: 1px solid var(--ink); background: var(--surface); padding: clamp(1.25rem, 3vw, 2.25rem); display: grid; gap: 1.75rem; }
+.panel-top { display: grid; gap: 0.5rem; }
+.panel-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: clamp(1.5rem, 4vw, 3rem); }
+@media (max-width: 800px) { .panel-cols { grid-template-columns: minmax(0, 1fr); } }
+.col { display: grid; gap: 1.5rem; align-content: start; min-width: 0; }
+.block { display: grid; gap: 0.5rem; }
+.ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.ticks li { position: relative; padding-left: 1.25rem; }
+.ticks li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 0.6rem; height: 2px; background: var(--accent); }
+.takeaway { border-top: 1px solid var(--line); padding-top: 1.25rem; display: grid; gap: 0.4rem; }
+.takeaway p { font-family: var(--f-display); font-weight: 500; font-size: 1.4rem; line-height: 1.25; max-width: 44rem; text-wrap: balance; }
+
+/* Skills */
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); border-top: 1px solid var(--ink); }
+.skill { padding: 1.4rem 1.4rem 1.6rem 0; display: grid; gap: 0.9rem; align-content: start; min-width: 0; }
+@media (min-width: 640px) { .skill { border-right: 1px solid var(--line); padding-left: 1.4rem; } .skill:first-child { padding-left: 0; } .skill:last-child { border-right: 0; } }
+.skill ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+.skill li { line-height: 1.4; }
+.sw li { display: flex; justify-content: space-between; gap: 0.75rem; border-bottom: 1px dotted var(--line); padding-bottom: 0.4rem; }
+.sw .lv { font-family: var(--f-mono); font-size: 0.74rem; color: var(--ink-2); text-align: right; white-space: nowrap; padding-top: 0.15rem; }
+
+/* Process */
+.process { background: var(--band); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0; counter-reset: step; }
+.step { padding: 1.1rem 1.1rem 1.2rem 0; border-top: 2px solid var(--ink); display: grid; gap: 0.4rem; align-content: start; position: relative; }
+.step .no { font-family: var(--f-mono); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.08em; }
+.step h3 { font-size: 1.35rem; }
+.step p { color: var(--ink-2); font-size: 0.95rem; line-height: 1.5; }
+
+/* Career */
+.timeline { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.job { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: 0.5rem 2rem; padding-block: 1.6rem; border-bottom: 1px solid var(--line); }
+@media (max-width: 720px) { .job { grid-template-columns: minmax(0, 1fr); } }
+.job .when { font-family: var(--f-mono); font-size: 0.82rem; color: var(--ink-2); padding-top: 0.35rem; font-variant-numeric: tabular-nums; }
+.job .body { display: grid; gap: 0.6rem; min-width: 0; }
+.job .org { font-weight: 600; }
+.job .org span { font-weight: 400; color: var(--ink-2); }
+.job .note { color: var(--ink-2); }
+.job ul { margin-top: 0.2rem; }
+.sub { font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); margin-top: 0.6rem; }
+
+/* Achievement */
+.ach { display: grid; grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); border: 1px solid var(--ink); background: var(--surface); }
+@media (max-width: 760px) { .ach { grid-template-columns: minmax(0, 1fr); } }
+.ach-meta { padding: 1.5rem; display: grid; gap: 0.5rem; align-content: start; border-right: 1px solid var(--line); background: var(--band); }
+@media (max-width: 760px) { .ach-meta { border-right: 0; border-bottom: 1px solid var(--line); } }
+.ach-big { font-family: var(--f-display); font-weight: 700; font-size: 2.3rem; line-height: 1.02; text-transform: uppercase; letter-spacing: 0.02em; }
+.ach-body { padding: clamp(1.25rem, 3vw, 2rem); display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.ach-body .btn { justify-self: start; }
+
+/* Education */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); }
+.edu-col { display: grid; gap: 1.1rem; align-content: start; min-width: 0; }
+.edu-item { display: grid; gap: 0.15rem; border-top: 1px solid var(--line); padding-top: 0.9rem; }
+.edu-item b { font-weight: 600; }
+.edu-item span { color: var(--ink-2); font-size: 0.95rem; }
+
+/* Contact */
+.contact { background: var(--band); }
+.contact-grid { display: grid; gap: 1.5rem; max-width: 46rem; }
+.mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+.mail { font-family: var(--f-mono); font-size: clamp(1rem, 3.6vw, 1.3rem); overflow-wrap: anywhere; user-select: all; }
+.status { font-family: var(--f-mono); font-size: 0.78rem; color: var(--accent); min-height: 1.2em; }
+footer { padding-block: 1.5rem; border-top: 1px solid var(--line); color: var(--ink-2); font-size: 0.9rem; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 1.5rem; }
+</style>
+
+<style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap head-in">
+    <a class="brand" href="#top">Ankit Badola</a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#career">Career</a>
+      <a href="#achievement">Achievement</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="sec hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="label eyebrow">Automotive Manufacturing · Ingolstadt, Germany</p>
+          <h1>Project Manager for BIW tooling, fixtures and automation lines</h1>
+          <p class="lede">12+ years of experience across Body-in-White tooling and fixture design, production readiness, machine commissioning and automation integration for OEMs in Europe and Asia.</p>
+          <div class="chips">
+            <span class="chip">12+ Years</span>
+            <span class="chip">BIW Tooling</span>
+            <span class="chip">Automation</span>
+            <span class="chip">Project Management</span>
+          </div>
+          <div class="actions">
+            <a class="btn primary" href="#projects">View projects</a>
+            <a class="btn" href="https://linkedin.com/in/ankitbadola">LinkedIn</a>
+            <a class="btn" href="#contact">Get in touch</a>
+          </div>
+        </div>
+
+        <aside class="titleblock" aria-label="Profile summary">
+          <div class="tb-name">
+            <span class="label">Name</span>
+            <div class="nm">Ankit Badola</div>
+          </div>
+          <div class="tb-row"><span class="label">Role</span><span class="val">Project Manager, Mechanical Engineering</span></div>
+          <div class="tb-row"><span class="label">Discipline</span><span class="val">BIW tooling, fixture design, line commissioning</span></div>
+          <div class="tb-row"><span class="label">Base</span><span class="val">Ingolstadt, Bavaria</span></div>
+          <div class="tb-row"><span class="label">Largest team</span><span class="val">20 people</span></div>
+          <div class="tb-row"><span class="label">CAD</span><span class="val">CATIA V5 (Expert)</span></div>
+          <div class="tb-row"><span class="label">Languages</span><span class="val">English, Hindi, German (A1)</span></div>
+          <div class="tb-row"><span class="label">Rev.</span><span class="val mono">10/2026</span></div>
+        </aside>
+      </div>
+
+      <div class="clients">
+        <p class="label">Worked with</p>
+        <div class="client-list">
+          <span>BMW</span><span>Mercedes-Benz</span><span>Jaguar Land Rover</span><span>Audi</span><span>Volkswagen</span><span>Volvo</span><span>ABB</span><span>Fisker</span><span>Valmet Automotive</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <div class="sec-head">
+            <p class="label eyebrow">About me</p>
+            <h2>Hands-on tooling engineering with ownership of the project.</h2>
+          </div>
+          <div class="prose">
+            <p>I am a mechanical engineer and project manager with more than 12 years of experience in BIW tooling and fixture design, production process readiness, machine commissioning and automation integration for the automotive industry.</p>
+            <p>My work runs from concept tooling and gripper and gun payload validation through ergo and poka-yoke studies, TD1 and TD2 customer reviews, safety validation and operational handover. I have led offshore and onsite teams of up to 20 people.</p>
+            <p>I am currently pursuing an MBA in Logistics, Materials and Supply Chain Management and learning German alongside it.</p>
+          </div>
+        </div>
+        <div class="stats" role="list">
+          <div class="stat" role="listitem"><span class="n">12+</span><span class="t">Years in automotive tooling and automation</span></div>
+          <div class="stat" role="listitem"><span class="n">20</span><span class="t">People in the largest team I have led</span></div>
+          <div class="stat" role="listitem"><span class="n">3</span><span class="t">Countries coordinated at once: Germany, China, Sweden</span></div>
+          <div class="stat" role="listitem"><span class="n">0</span><span class="t">Defects in the AI-based poka-yoke validation at BMW</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label eyebrow">Selected projects</p>
+        <h2>Three projects, three sides of my work.</h2>
+        <p>Line commissioning and handover, international automation coordination, and onsite design leadership.</p>
+      </div>
+
+      <div class="tabs" role="tablist" aria-label="Projects">
+        <button class="tab" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true" type="button">
+          <span class="label">Project Manager</span>
+          <span class="tt">BMW ML13 Gearbox Assembly Line</span>
+          <span class="ts">Dingolfing · Line readiness · Handover</span>
+        </button>
+        <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1" type="button">
+          <span class="label">International Coordination</span>
+          <span class="tt">Three-Country Automation Coordination</span>
+          <span class="ts">ABB China · Volvo Sweden · Yaskawa Slovenia</span>
+        </button>
+        <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" type="button">
+          <span class="label">Design Lead Onsite</span>
+          <span class="tt">JLR Closures L460 and L461</span>
+          <span class="ts">Gaydon · Solihull · BIW tooling</span>
+        </button>
+      </div>
+
+      <article class="panel" id="panel-0" role="tabpanel" aria-labelledby="tab-0">
+        <div class="panel-top">
+          <p class="label">Sakal Robo System GmbH · 05/2024 – 07/2026</p>
+          <h3>BMW ML13 Gearbox Assembly Line, Dingolfing</h3>
+        </div>
+        <div class="panel-cols">
+          <div class="col">
+            <div class="block">
+              <p class="label eyebrow">Challenge</p>
+              <p>Bring a gearbox assembly line to production readiness, from process setup and machine commissioning to operational handover, with the OEM, the line builder and the technician teams working to one schedule.</p>
+            </div>
+            <div class="block">
+              <p class="label eyebrow">Result</p>
+              <p>The line was handed over on time and within the agreed schedule. The AI-driven poka-yoke vision system reached zero-defect assembly validation.</p>
+            </div>
+            <div class="block">
+              <p class="label eyebrow">Tools</p>
+              <div class="chips"><span class="chip">Siemens TIA Portal</span><span class="chip">Keyence Vision</span><span class="chip">Sicherheitsmatrix</span><span class="chip">BBÜ</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="block">
+              <p class="label eyebrow">My responsibilities</p>
+              <ul class="ticks">
+                <li>Owned process setup, machine commissioning and operational handover end to end.</li>
+                <li>Ran daily project calls between BMW, the line builder and the internal technicians, without formal authority over their teams.</li>
+                <li>Developed HMI screens in Siemens TIA Portal for line control and monitoring.</li>
+                <li>Implemented Keyence vision cameras for poka-yoke teaching.</li>
+                <li>Verified and finalised the safety matrix and ran Not-Halt checks, including emergency-stop tests.</li>
+                <li>Prepared and submitted the BBÜ documentation (Betriebsbereitschaftsüberprüfung) for final handover.</li>
+                <li>Led technician teams of up to 20 people through quality and safety validation.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="takeaway">
+          <p class="label eyebrow">Key takeaway</p>
+          <p>Experience taking a line from commissioning to a documented, safety-validated handover while coordinating several organisations.</p>
+        </div>
+      </article>
+
+      <article class="panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1" hidden>
+        <div class="panel-top">
+          <p class="label">Sakal Robo System GmbH · 05/2024 – 07/2026</p>
+          <h3>Automation coordination across Germany, China, Sweden and Slovenia</h3>
+        </div>
+        <div class="panel-cols">
+          <div class="col">
+            <div class="block">
+              <p class="label eyebrow">Challenge</p>
+              <p>Keep automation work aligned across several countries and suppliers at the same time, and resolve faults on site when they appeared.</p>
+            </div>
+            <div class="block">
+              <p class="label eyebrow">Result</p>
+              <p>Simultaneous coordination across Germany, China and Sweden, with on-site fault resolution at Yaskawa in Slovenia.</p>
+            </div>
+            <div class="block">
+              <p class="label eyebrow">Tools</p>
+              <div class="chips"><span class="chip">DELMIA</span><span class="chip">Process Designer</span><span class="chip">Keyence Vision</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="block">
+              <p class="label eyebrow">My responsibilities</p>
+              <ul class="ticks">
+                <li>Led automation coordination with the ABB China team.</li>
+                <li>Coordinated with Volvo Group Sweden.</li>
+                <li>Handled on-site fault resolution and troubleshooting at Yaskawa Slovenia.</li>
+                <li>Ran robotic simulations in DELMIA for Mercedes-Benz projects.</li>
+                <li>Built cells and placed equipment in layout using Process Designer.</li>
+                <li>Integrated vision-based systems on Mercedes-Benz projects.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="takeaway">
+          <p class="label eyebrow">Key takeaway</p>
+          <p>Experience combining simulation, vision systems and on-site troubleshooting with cross-border coordination.</p>
+        </div>
+      </article>
+
+      <article class="panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+        <div class="panel-top">
+          <p class="label">Sacha Engineering · Design Lead Onsite · 2018 – 2020</p>
+          <h3>JLR Closures L460 and L461, Gaydon, Leamington Spa and Solihull</h3>
+        </div>
+        <div class="panel-cols">
+          <div class="col">
+            <div class="block">
+              <p class="label eyebrow">Challenge</p>
+              <p>Lead BIW tooling design for the closures of two Jaguar Land Rover programmes, with a 20-member offshore team and customer reviews at TD1 and TD2.</p>
+            </div>
+            <div class="block">
+              <p class="label eyebrow">Result</p>
+              <p>All team deliverables were on time and to quality over 2+ years of leading design and technician teams.</p>
+            </div>
+            <div class="block">
+              <p class="label eyebrow">Tools</p>
+              <div class="chips"><span class="chip">CATIA V5</span><span class="chip">NX12</span><span class="chip">Teamcenter</span><span class="chip">SAP</span></div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="block">
+              <p class="label eyebrow">My responsibilities</p>
+              <ul class="ticks">
+                <li>Led a 20-member offshore team from onsite at JLR Gaydon and Leamington Spa (L460, 2019–20) and JLR Solihull (L461, 2018).</li>
+                <li>Presented tooling design for front door, rear door, fender and hood at TD1 and TD2 reviews.</li>
+                <li>Reviewed simulation cells and layouts with the customer at L1 and L2.</li>
+                <li>Raised snags on joining and tooling feasibility during Simultaneous Engineering.</li>
+                <li>Ran reachability, ergo and poka-yoke studies, and validated clamping fixtures and build sequence.</li>
+                <li>Attended weekly PMST meetings at JLR Gaydon.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="takeaway">
+          <p class="label eyebrow">Key takeaway</p>
+          <p>Experience leading a large offshore team from the customer's site and catching fit and tooling issues before they became rework.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label eyebrow">Expertise</p>
+        <h2>Technical depth and project management in one profile.</h2>
+      </div>
+      <div class="skill-grid">
+        <div class="skill">
+          <h3>BIW &amp; Tooling</h3>
+          <ul>
+            <li>BIW manufacturing processes</li>
+            <li>Concept tooling and fixture design</li>
+            <li>Gripper, gun and fixture payload validation</li>
+            <li>Reachability and ergo studies</li>
+            <li>Clamping fixture and build sequence validation</li>
+            <li>Simultaneous Engineering snags</li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Automation &amp; Safety</h3>
+          <ul>
+            <li>Production line readiness and commissioning</li>
+            <li>Poka-yoke, including Keyence vision systems</li>
+            <li>Sicherheitsmatrix and Not-Halt checks</li>
+            <li>BBÜ handover documentation</li>
+            <li>HMI development in Siemens TIA Portal</li>
+            <li>Non-conformance resolution and RCA</li>
+          </ul>
+        </div>
+        <div class="skill">
+          <h3>Project Management</h3>
+          <ul>
+            <li>Cross-organisational coordination</li>
+            <li>International team leadership, up to 20 people</li>
+            <li>TD1 and TD2 customer reviews</li>
+            <li>Engineering change management</li>
+            <li>Documentation and snag lists</li>
+            <li>MS Project, Asana, Teams Planner</li>
+          </ul>
+        </div>
+        <div class="skill sw">
+          <h3>Software</h3>
+          <ul>
+            <li><span>CATIA V5</span><span class="lv">Expert</span></li>
+            <li><span>DELMIA / Process Simulate</span><span class="lv">Simulation</span></li>
+            <li><span>Teamcenter, SAP</span><span class="lv">ECM, BOM, cFolders</span></li>
+            <li><span>NX12</span><span class="lv">Basic–Familiar</span></li>
+            <li><span>AutoCAD</span><span class="lv">2017</span></li>
+            <li><span>Fusion 360, SolidWorks</span><span class="lv">Familiar</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec process">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label eyebrow">My approach</p>
+        <h2>From concept tooling to a signed-off handover.</h2>
+        <p>The order I follow on tooling and line projects.</p>
+      </div>
+      <ol class="steps">
+        <li class="step"><span class="no">01</span><h3>Concept</h3><p>Tooling concepts and 3D design against the customer's standards.</p></li>
+        <li class="step"><span class="no">02</span><h3>Validate</h3><p>Payload, reachability, ergo and poka-yoke studies.</p></li>
+        <li class="step"><span class="no">03</span><h3>Review</h3><p>TD1 and TD2 customer reviews, with snags raised early.</p></li>
+        <li class="step"><span class="no">04</span><h3>Build</h3><p>Prototype fixtures, line build and machine commissioning.</p></li>
+        <li class="step"><span class="no">05</span><h3>Safety</h3><p>Safety matrix, Not-Halt checks and emergency-stop tests.</p></li>
+        <li class="step"><span class="no">06</span><h3>Handover</h3><p>BBÜ documentation, traceability and quality sign-off.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="career">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label eyebrow">Career</p>
+        <h2>Engineering foundation, then leadership.</h2>
+      </div>
+      <ol class="timeline">
+        <li class="job">
+          <div class="when">05/2024 – 07/2026</div>
+          <div class="body">
+            <h3>Project Manager, Mechanical Engineering</h3>
+            <p class="org">Sakal Robo System GmbH <span>· Automotive automation specialist, about 20 employees</span></p>
+            <p class="note">Clients: BMW Group, Mercedes-Benz, Volvo, ABB. Owned line readiness for the BMW ML13 gearbox assembly line in Dingolfing, led international automation coordination across three countries and delivered zero-defect assembly validation with an AI-driven vision system.</p>
+          </div>
+        </li>
+        <li class="job">
+          <div class="when">01/2024 – 04/2024</div>
+          <div class="body">
+            <h3>CAD Designer, Automotive Product Design</h3>
+            <p class="org">Tecon Kirschner Richter GmbH <span>· Engineering services, Audi programmes</span></p>
+            <p class="note">Designed ECU brackets and luggage compartment components in CATIA V5, checking draft and mouldability against Audi standards.</p>
+          </div>
+        </li>
+        <li class="job">
+          <div class="when">2017 – 2023</div>
+          <div class="body">
+            <h3>Team Lead, Automotive Tooling Design</h3>
+            <p class="org">Sacha Engineering, formerly RLE International <span>· Global engineering services</span></p>
+            <p class="note">Clients: JLR, Daimler, BMW, VW, Fisker, Valmet Automotive. Led design and technician teams of up to 20 people, produced concept tooling and documentation in CATIA V5 and NX12, and presented tooling designs at TD1 and TD2 reviews.</p>
+            <ul class="ticks">
+              <li>Project Lead, Fisker FM29: all design activities for Rear Floor, Front Floor, Dash Structure and Body Sides Outer to 3D-finish level, with an offshore team of 12.</li>
+              <li>Design Lead Onsite, Cladding Line W177 (Mercedes-Benz/Daimler), Valmet Automotive, Uusikaupunki, Finland: 5-member offshore team, 4 months in 2018.</li>
+              <li>Design Lead Onsite, Closures L460 and L461 for JLR in the UK, with a 20-member offshore team.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="job">
+          <div class="when">2013 – 2017</div>
+          <div class="body">
+            <h3>Engineer, Production Solutions</h3>
+            <p class="org">EDAG Production Solution India <span>· Automotive development services</span></p>
+            <p class="note">Kinematic simulation of BIW fixtures in DELMIA and concept development for BMW, VW, Daimler and Audi tooling projects. Took independent ownership of international OEM client projects within 2 years. Onsite at EDAG Fulda, Germany, on BMW G05/06/07 in 2016.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="achievement">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label eyebrow">Achievement</p>
+        <h2>Beyond work: promotion to the Cricket Bundesliga.</h2>
+      </div>
+      <article class="ach">
+        <div class="ach-meta">
+          <p class="label">September 2026</p>
+          <p class="ach-big">50-Over Bundesliga</p>
+          <p class="label">Bavaria's top cricket division</p>
+        </div>
+        <div class="ach-body">
+          <h3>SV Haunwöhr cricket department promoted to the 50-Over Bundesliga</h3>
+          <p>I play club cricket for the SV Haunwöhr cricket department in Ingolstadt, the Ingolstadt Rising Stars. The team finished top of the league table and secured promotion in the final match against Coburg, which needed both a win and a large margin.</p>
+          <p>It took the club only four seasons of regular league play to move from the lower divisions to the Bundesliga. Cricket and badminton are my main interests outside engineering.</p>
+          <a class="btn" href="https://www.sv-haunwoehr.de/cricket-abteilung-steigt-in-die-bundesliga-auf">Read the club report (German)</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec" id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="label eyebrow">Education &amp; languages</p>
+        <h2>Ongoing professional development.</h2>
+      </div>
+      <div class="edu-grid">
+        <div class="edu-col">
+          <p class="label">Education</p>
+          <div class="edu-item"><b>MBA, Logistics, Materials &amp; Supply Chain Management</b><span>Andhra University, India · Aug 2026 – Jul 2028, in progress</span></div>
+          <div class="edu-item"><b>B.E. (Hons.), Mechanical Engineering</b><span>Indira Gandhi Engineering College, Sagar · 2009 – 2013 · 75.06%</span></div>
+        </div>
+        <div class="edu-col">
+          <p class="label">Certifications</p>
+          <div class="edu-item"><b>Fe.screen-sim</b><span>Manufacturing simulation</span></div>
+          <div class="edu-item"><b>Project Management</b><span>Multiple certifications</span></div>
+        </div>
+        <div class="edu-col">
+          <p class="label">Languages</p>
+          <div class="edu-item"><b>English</b><span>Fluent</span></div>
+          <div class="edu-item"><b>Hindi</b><span>Native</span></div>
+          <div class="edu-item"><b>German</b><span>A1, actively learning</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec contact" id="contact">
+    <div class="wrap">
+      <div class="contact-grid">
+        <p class="label eyebrow">Let's connect</p>
+        <h2>Interested in automotive project management or automation?</h2>
+        <p>I am looking for roles in automotive and BIW project management, automation and line commissioning, and tooling and fixture engineering, based in Germany.</p>
+        <div class="mail-row">
+          <span class="mail" id="mail-text">ankitbadola.de@gmail.com</span>
+          <button class="btn primary" id="copy-mail" type="button">Copy email</button>
+          <a class="btn" href="mailto:ankitbadola.de@gmail.com">Open mail app</a>
+          <a class="btn" href="https://linkedin.com/in/ankitbadola">LinkedIn</a>
+        </div>
+        <p class="status" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 Ankit Badola</span>
+    <span>Ingolstadt, Germany</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+  function select(i, focus) {
+    tabs.forEach(function (t, j) {
+      var on = i === j;
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById('panel-' + j).hidden = !on;
+    });
+    if (focus) tabs[i].focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { select(i, false); });
+    t.addEventListener('keydown', function (e) {
+      var n = tabs.length, k = e.key;
+      if (k === 'ArrowRight' || k === 'ArrowDown') { e.preventDefault(); select((i + 1) % n, true); }
+      else if (k === 'ArrowLeft' || k === 'ArrowUp') { e.preventDefault(); select((i - 1 + n) % n, true); }
+      else if (k === 'Home') { e.preventDefault(); select(0, true); }
+      else if (k === 'End') { e.preventDefault(); select(n - 1, true); }
+    });
+  });
+
+  var btn = document.getElementById('copy-mail');
+  var status = document.getElementById('copy-status');
+  var mail = document.getElementById('mail-text');
+  function fallbackSelect() {
+    try {
+      var r = document.createRange(); r.selectNodeContents(mail);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+    } catch (e) {}
+    status.textContent = 'Address selected. Copy it with your keyboard.';
+  }
+  btn.addEventListener('click', function () {
+    var text = mail.textContent.trim();
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () {
+        status.textContent = 'Email address copied.';
+      }, fallbackSelect);
+    } else { fallbackSelect(); }
+  });
+})();
+</script>
+
+</body>
+</html>
